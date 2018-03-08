@@ -16,6 +16,7 @@ modules with:
 
     $ wget -P data/hmm_tmp https://dumps.wikimedia.org/simplewiki/20171201/simplewiki-20171201-pages-articles-multistream.xml.bz2 
     $ python datagen.py
+    $ python unker.py -i data/hmm_data/input.txt -o data/hmm_data/input.txt.unked
 
 ## Training a model
 
