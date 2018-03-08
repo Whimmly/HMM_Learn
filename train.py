@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import sys, json, codecs, pickle, argparse
+import sys, json, codecs, pickle, argparse, datetime
 import numpy as np
 
 from sklearn.externals import joblib
@@ -10,6 +10,7 @@ from nltk import FreqDist
 def warn(msg):
     print(msg, file=sys.stderr)
 
+print(datetime.datetime.now())
 np.random.seed(seed=None)
 
 args = argparse.ArgumentParser(
@@ -80,3 +81,4 @@ with open(outfile("freqdist"), "wb") as f:
 warn("Output written to:\n\t- {0}\n\t- {1}\n\t- {2}".format(
         outfile("pkl"), outfile("le"), outfile("freqdist")
     ))
+print(datetime.datetime.now())

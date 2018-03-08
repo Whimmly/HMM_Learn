@@ -12,6 +12,11 @@ modules with:
 
     $ pip install -r requirements.txt
 
+## Generating the data
+
+    $ wget -P data/hmm_tmp https://dumps.wikimedia.org/simplewiki/20171201/simplewiki-20171201-pages-articles-multistream.xml.bz2 
+    $ python datagen.py
+
 ## Training a model
 
 Example for training a model with 8 hidden states based on given text.
@@ -21,7 +26,7 @@ comparable size). We recommend cleaning up the text as much as possible,
 leaving only the essential punctuation (if any).
 
     $ mkdir demo
-    $ ./train.py -n 8 -o demo/hmm < ../input/input.txt
+    $ ./train.py -n 8 -o demo/hmm < data/hmm_data/input.txt
 
 ## Generating new text
 

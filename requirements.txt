@@ -5,3 +5,7 @@ scikit-learn
 nltk
 hmmlearn
 matplotlib
+bz2file
+six
+tensorflow
+mwparserfromhell
