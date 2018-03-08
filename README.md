@@ -26,7 +26,7 @@ comparable size). We recommend cleaning up the text as much as possible,
 leaving only the essential punctuation (if any).
 
     $ mkdir demo
-    $ ./train.py -n 8 -o demo/hmm < data/hmm_data/input.txt
+    $ ./train.py -n 8 -o demo/hmm < data/hmm_data/input.txt.unked
 
 ## Generating new text
 

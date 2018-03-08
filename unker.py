@@ -2,13 +2,13 @@ from collections import Counter
 import argparse
 
 args = argparse.ArgumentParser(
-        description="Replace unknown words with UNK")
+    description="Replace unknown words with UNK")
 args.add_argument("-v", "--vocab-size", type=int, required=True,
-        help="number of vocab words")
+                  help="number of vocab words")
 args.add_argument("-i", required=True, metavar="FILENAME",
-        help="filename for input file")
+                  help="filename for input file")
 args.add_argument("-o", required=True, metavar="FILENAME",
-        help="filename for output file")
+                  help="filename for output file")
 args = args.parse_args()
 
 
@@ -31,7 +31,6 @@ def main():
         with open(args.o, "w") as output_file:
             for line in input_file:
                 output_file.write(replace_unks(line, vocab_set) + "\n")
-
 
 if __name__ == "__main__":
     main()
