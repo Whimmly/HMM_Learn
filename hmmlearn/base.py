@@ -473,9 +473,14 @@ class _BaseHMM(BaseEstimator):
 
         self.monitor_ = ConvergenceMonitor(self.tol, self.n_iter, self.verbose)
         for iter in range(self.n_iter):
+            print("On iter:", iter)
             stats = self._initialize_sufficient_statistics()
             curr_logprob = 0
+            ind = 0
             for i, j in iter_from_X_lengths(X, lengths):
+                if ind % 10000 == 0:
+                    print("On line:", ind)
+                ind += 1
                 sequence = np.array(X[i:j], np.int64)
                 framelogprob = self._compute_log_likelihood(sequence)
                 logprob, fwdlattice = self._do_forward_pass(framelogprob)

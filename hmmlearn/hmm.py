@@ -402,7 +402,7 @@ class MultinomialHMM(_BaseHMM):
             if not hasattr(self, "n_features"):
                 symbols = set()
                 for i, j in iter_from_X_lengths(X, lengths):
-                    symbols |= set(np.array(X[i:j]).flatten())
+                    symbols |= set(symbol[0] for symbol in X[i:j])
                 self.n_features = len(symbols)
             self.emissionprob_ = self.random_state \
                 .rand(self.n_components, self.n_features)
