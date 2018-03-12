@@ -21,6 +21,7 @@ class MySentences(object):
 
 if __name__ == "__main__":
     sentences = MySentences(args.i)
-    model = gensim.models.Word2Vec(sentences, min_count=5, iter=5, size=100)
+    model = gensim.models.Word2Vec(sentences, min_count=5, iter=5, size=100,
+                                   hs=1, negative=0)
     model.save(args.o)
 

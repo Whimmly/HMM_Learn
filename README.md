@@ -29,6 +29,12 @@ leaving only the essential punctuation (if any).
     $ mkdir demo
     $ ./train.py -n 8 -o demo/hmm < data/hmm_data/input.txt.unked
 
+Train word2vec with:
+    $ python word2vec.py -i data/hmm_data/input.txt.unked -o demo/wiki_vectors
+
+Train gru with:
+    $ python gru.py --iter 100 -i data/hmm_data/input.txt.unked -w2v demo/wiki_vectors
+
 ## Generating new text
 
 Generate `20` lines of text, `12` words per line, by simulating the hidden
