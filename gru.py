@@ -44,11 +44,11 @@ class RNN(nn.Module):
         output, hidden = self.encoder(input_tensor, hidden)
         return self.decoder(output), hidden
 
-    def initHidden(self):
-        return Variable(torch.zeros(1, 1, self.hidden_size))
+    def initHidden(self, batch_size=1):
+        return Variable(torch.zeros(1, batch_size, self.hidden_size))
 
-    def initInput(self):
-        return Variable(torch.zeros(1, 1, self.input_size))
+    def initInput(self, batch_size=1):
+        return Variable(torch.zeros(1, batch_size, self.input_size))
 
 
 class MySentences(object):
@@ -75,7 +75,7 @@ def train(rnn, input_line_tensor, target_line_tensor):
     input_line_tensor = input_line_tensor.permute(1, 0, 2)
     target_line_tensor = target_line_tensor.permute(1, 0, 2)
 
-    hidden = rnn.initHidden()
+    hidden = rnn.initHidden(input_line_tensor.size()[1])
     optimizer = torch.optim.Adam(rnn.parameters())
     rnn.zero_grad()  # Equivalent to optimizer.zero_grad()
     output, hidden = rnn(input_line_tensor, hidden)
