@@ -1,6 +1,7 @@
 data/hmm_data/*
 data/hmm_tmp/*
 demo/*
+checkpoints/*
 !**/.gitkeep
 
 .cache

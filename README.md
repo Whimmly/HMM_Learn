@@ -33,7 +33,7 @@ Train word2vec with:
     $ python word2vec.py -i data/hmm_data/input.txt.unked -o demo/wiki_vectors
 
 Train gru with:
-    $ python gru.py --iter 100 -i data/hmm_data/input.txt.unked -w2v demo/wiki_vectors
+    $ python gru.py --epochs 10 -d data/hmm_data/input.txt.unked --w2v demo/wiki_vectors
 
 ## Generating new text
 
