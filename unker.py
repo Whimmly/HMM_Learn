@@ -15,8 +15,9 @@ args = args.parse_args()
 def replace_unks(sentence, vocab_set):
     split_sentence = sentence.split()
     for i in range(len(split_sentence)):
+        split_sentence[i] = split_sentence[i].lower()
         if split_sentence[i] not in vocab_set:
-            split_sentence[i] = "UNK"
+            split_sentence[i] = "unk"
     return ' '.join(split_sentence)
 
 
@@ -24,7 +25,7 @@ def main():
     word_counter = Counter()
     with open(args.i, "r") as input_file:
         for line in input_file:
-            word_counter.update(line.split())
+            word_counter.update([word.lower() for word in line.split()])
     vocab_set = set(word[0] for word in
                     word_counter.most_common(args.vocab_size))
     with open(args.i, "r") as input_file:
