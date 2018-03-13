@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import gensim, logging, argparse
 import numpy as np
 

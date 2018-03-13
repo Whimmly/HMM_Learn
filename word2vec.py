@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import gensim, logging, argparse
 
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s',
