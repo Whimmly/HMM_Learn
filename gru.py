@@ -9,6 +9,7 @@ import argparse
 import datetime
 import random
 import numpy as np
+from pprint import pprint
 
 args = argparse.ArgumentParser(
     description="Train GRU NLG model")
@@ -220,25 +221,32 @@ def main():
                 print("Finished batch:", i // batch_size)
 
             if i % plot_every == 0 and i != 0:
-                all_losses.append(total_loss.data[0] / min(batch_size,
-                                                   len(datapoints) - i))
+                batch_loss = total_loss.data[0] / min(batch_size,
+                                                      len(datapoints) - i)
+                print("Loss at batch", i // batch_size, ":", batch_loss)
+                all_losses.append(batch_loss)
                 total_loss = 0
+
 
 
         print("Finished epoch:", epoch)
         if epoch % save_every == 0:
-            torch.save(rnn.state_dict(), args.o + "." + str(epoch))
+            data_fname = args.data.split('/')[-1]
+            torch.save(rnn.state_dict(), args.o + "." + data_fname + "." + 
+                       str(batch_size) + "." + str(epoch))
             print("Saved checkpoint")
 
     for word in ['april', 'country', 'month', 'food', 'references', 'desk',
                  'is']:
-        print(word, predict_next_word(rnn, word2vec, word), "\n")
+        print("\n", word, ":")
+        pprint(predict_next_word(rnn, word2vec, word))
 
     # Visualize loss over time
     if len(all_losses) > 0:
+        print("All losses: ")
+        pprint(all_losses)
         try:
             plt.figure()
-            print(all_losses)
             plt.plot(all_losses)
             plt.show()
         except Exception as e:
