@@ -205,7 +205,10 @@ def main():
         datapoints = [datapoint
                       for sentence in sentences
                       for datapoint in word_window_generator(sentence)]
+        print("Loaded sentences")
+
         random.shuffle(datapoints)
+        print("Shuffled data")
 
         for i in range(0, len(datapoints), batch_size):
             input_line_tensor, target_line_tensor = strings_to_tensors(
@@ -217,23 +220,29 @@ def main():
                 print("Finished batch:", i // batch_size)
 
             if i % plot_every == 0 and i != 0:
-                all_losses.append(total_loss / min(batch_size,
+                all_losses.append(total_loss.data[0] / min(batch_size,
                                                    len(datapoints) - i))
                 total_loss = 0
 
+
         print("Finished epoch:", epoch)
         if epoch % save_every == 0:
-            print("Saving checkpoint")
             torch.save(rnn.state_dict(), args.o + "." + str(epoch))
+            print("Saved checkpoint")
 
-    for word in ['april', 'country', 'month', 'food', 'references', 'desk']:
+    for word in ['april', 'country', 'month', 'food', 'references', 'desk',
+                 'is']:
         print(word, predict_next_word(rnn, word2vec, word), "\n")
 
     # Visualize loss over time
     if len(all_losses) > 0:
-        plt.figure()
-        plt.plot([var.data[0] for var in all_losses])
-        plt.show()
+        try:
+            plt.figure()
+            print(all_losses)
+            plt.plot(all_losses)
+            plt.show()
+        except Exception as e:
+            print("Unable to show graph due to error:", e)
 
     print("End:", datetime.datetime.now())
 

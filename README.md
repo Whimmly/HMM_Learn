@@ -15,8 +15,8 @@ modules with:
 ## Generating the data
 
     $ wget -P data/hmm_tmp https://dumps.wikimedia.org/simplewiki/20171201/simplewiki-20171201-pages-articles-multistream.xml.bz2 
-    $ python datagen.py
-    $ python unker.py -i data/hmm_data/input.txt -o data/hmm_data/input.txt.unked
+    $ ./datagen.py
+    $ ./unker.py -i data/hmm_data/input.txt -o data/hmm_data/input.txt.unked
 
 ## Training a model
 
@@ -30,10 +30,10 @@ leaving only the essential punctuation (if any).
     $ ./train.py -n 8 -o demo/hmm < data/hmm_data/input.txt.unked
 
 Train word2vec with:
-    $ python word2vec.py -i data/hmm_data/input.txt.unked -o demo/wiki_vectors
+    $ ./word2vec.py -i data/hmm_data/input.txt.unked -o demo/wiki_vectors
 
 Train gru with:
-    $ python gru.py --epochs 10 -d data/hmm_data/input.txt.unked --w2v demo/wiki_vectors
+    $ ./gru.py --epochs 10 -d data/hmm_data/input.txt.unked --w2v demo/wiki_vectors --batch_size 10000
 
 ## Generating new text
 
